@@ -1,0 +1,367 @@
+4.2.1.1
+
+
+#include <iostream>
+
+using namespace std;
+
+int main (){
+  int arg1;
+  arg1 = -1;
+  int x, y, z;
+  char myDouble = '5';
+  char arg1 = 'A';
+  
+  cout << arg1 << "\n";
+  
+  return 0;
+}
+Програма не скомпілюєтся, не можна використовувати дві змінні з однаковим ім'ям
+після спроби скомпілювати появляєтся помилка 
+Compilation failed due to following error(s).main.cpp: In function ‘int main()’:
+main.cpp:18:8: error: conflicting declaration ‘char arg1’
+   18 |   char arg1 = 'A';
+      |        ^~~~
+main.cpp:14:7: note: previous declaration as ‘int arg1’
+   14 |   int arg1;
+      |       ^~~~
+вона означає що ми спробували оголосити зміну з імям arg1 двічі
+
+
+
+
+
+4.2.1.2
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+  int arg1 ;
+  arg1 = -1;
+
+  {
+    char arg1 = 'A';
+
+    cout << arg1 << "\n";
+  }
+  
+  return 0;
+}
+програма скомпілювалась та показує відповідь А.
+
+
+
+4.2.1.3
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+  int arg1 ;
+  arg1 = -1;
+
+  {
+    char arg1 = 'A';
+
+    cout << arg1 << "\n";
+  }
+  return 0;
+}
+
+Використовується декларація з внутрішнього вкладеного блоку char arg1 = 'A';
+Компілятор шукає змінну від найближчої області видимості до зовнішньої. Внутрішнє оголошення тимчасово перекриває (затіняє) зовнішнє
+
+
+
+4.2.1.4
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+  int arg1 ;
+  arg1 = -1;
+
+  {
+    char arg1 = 'A';
+  }
+
+  cout << arg1 << "\n";
+
+  return 0;
+}
+
+Використовується оголошення із зовнішнього блоку int arg1 = -1;
+Після закриваючої дужки } вкладений блок завершується, а локальна змінна char arg1 знищується. Зовнішня область видимості відновлює доступ до своєї змінної int arg1
+
+
+
+
+4.2.1.5
+
+using namespace std;
+
+int main(){
+  cout << "Hello , World !\n";
+
+  return 0;
+}
+
+#include <iostream>
+
+Програма не скомпільовується, тому що директива #include <iostream> розміщена в самому кінці файлу. Через це компілятор не знає про існування об'єкта cout та директиви using namespace std на момент їх оголошення.
+Потрібно перемістити рядок #include <iostream> на самий початок файлу (перед using namespace std;)
+
+
+
+4.2.2
+
+#include <stdlib.h>
+
+int main() {
+  return EXIT_SUCCESS; // або просто return 0;
+}
+
+#define O 1 замінює літеру «О» на 1, тому return O; фактично стає return 1;. Код 1 для ОС означає помилку, а успіх — це 0.
+
+
+
+
+4.2.3
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.14159265358979323846
+
+int main() {
+  double a = 5, b = 6, c = 7;
+
+  double p = (a + b + c) / 2;
+  double S = sqrt(p * (p - a) * (p - b) * (p - c));
+  double r = S / p;
+  double R = a * b * c / (4 * S);
+
+  double ha = 2 * S / a, hb = 2 * S / b, hc = 2 * S / c;
+
+  double ma = 0.5 * sqrt(2 * b * b + 2 * c * c - a * a);
+  double mb = 0.5 * sqrt(2 * a * a + 2 * c * c - b * b);
+  double mc = 0.5 * sqrt(2 * a * a + 2 * b * b - c * c);
+
+  double A = acos((b * b + c * c - a * a) / (2 * b * c)) * 180 / PI;
+  double B = acos((a * a + c * c - b * b) / (2 * a * c)) * 180 / PI;
+  double C = acos((a * a + b * b - c * c) / (2 * a * b)) * 180 / PI;
+
+  printf("S = %.4f, r = %.4f, R = %.4f\n", S, r, R);
+  printf("ha = %.4f, ma = %.4f, A = %.4f\n", ha, ma, A);
+  printf("hb = %.4f, mb = %.4f, B = %.4f\n", hb, mb, B);
+  printf("hc = %.4f, mc = %.4f, C = %.4f\n", hc, mc, C);
+
+  return 0;
+}
+
+Компіляція: gcc main.c -o main -lm (прапорець -lm потрібен для math.h).
+
+Вивід збігається з даними для тестування: S = 14.6969, r = 1.6330, R = 3.5722 тощо.
+
+
+
+
+4.2.4. Завдання згідно варіанту
+4.2.4.7. Варіант 7
+1. Площа прямокутника
+#include <stdio.h>
+
+int main() {
+  double a, b;
+  printf("Довжина і ширина: ");
+  scanf("%lf %lf", &a, &b);
+  printf("Площа = %.2f\n", a * b);
+  return 0;
+}
+
+
+2. Об'єм піраміди (V = S·h / 3)
+#include <stdio.h>
+
+int main() {
+  double s, h;
+  printf("Площа основи і висота: ");
+  scanf("%lf %lf", &s, &h);
+  printf("Об'єм = %.2f\n", s * h / 3);
+  return 0;
+}
+
+
+3. Об'єм паралелепіпеда (V = a·b·c)
+#include <stdio.h>
+
+int main() {
+  double a, b, c;
+  printf("Довжина, ширина і висота: ");
+  scanf("%lf %lf %lf", &a, &b, &c);
+  printf("Об'єм = %.2f\n", a * b * c);
+  return 0;
+}
+
+
+
+
+4.3.1. Тестовий бал
+#include <iostream>
+using namespace std;
+
+int main() {
+  int score;
+  cout << "Введіть бал (1-100): ";
+  cin >> score;
+
+  if (score < 1 || score > 100)
+    cout << "Некоректний бал\n";
+  else if (score >= 90)
+    cout << "A\n";
+  else if (score >= 82)
+    cout << "B\n";
+  else if (score >= 74)
+    cout << "C\n";
+  else if (score >= 64)
+    cout << "D\n";
+  else if (score >= 60)
+    cout << "E\n";
+  else if (score >= 35)
+    cout << "FX\n";
+  else
+    cout << "F\n";
+
+  return 0;
+}
+
+
+
+4.3.2. Калькулятор
+#include <iostream>
+using namespace std;
+
+int main() {
+  double a, b;
+  char op;
+  cout << "Введіть два числа і операцію (+ - * /): ";
+  cin >> a >> b >> op;
+
+  switch (op) {
+    case '+': cout << a + b << "\n"; break;
+    case '-': cout << a - b << "\n"; break;
+    case '*': cout << a * b << "\n"; break;
+    case '/':
+      if (b == 0)
+        cout << "Ділення на нуль\n";
+      else
+        cout << a / b << "\n";
+      break;
+    default:
+      cout << "Невідома операція\n";
+  }
+
+  return 0;
+}
+
+
+
+4.3.4. Вгадай число
+#include <iostream>
+using namespace std;
+
+int main() {
+  int lo = 1, hi = 100;
+  char ans;
+
+  cout << "Загадайте число від 1 до 100.\n";
+
+  while (lo < hi) {
+    int mid = (lo + hi) / 2;
+    cout << "Чи число більше за " << mid << "? (y/n): ";
+    cin >> ans;
+    if (ans == 'y')
+      lo = mid + 1;
+    else
+      hi = mid;
+  }
+
+  cout << "Ваше число: " << lo << "\n";
+  return 0;
+}
+
+
+
+4.3.5. Камінь, ножиці, папір
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+  srand(time(0));
+
+  char player;
+  cout << "Ваш вибір (r - камінь, s - ножиці, p - папір): ";
+  cin >> player;
+
+  int pc = rand() % 3; // 0 - камінь, 1 - ножиці, 2 - папір
+  const char* names[] = {"камінь", "ножиці", "папір"};
+
+  int me;
+  switch (player) {
+    case 'r': me = 0; break;
+    case 's': me = 1; break;
+    case 'p': me = 2; break;
+    default:
+      cout << "Невідомий вибір\n";
+      return 1;
+  }
+
+  cout << "Комп'ютер обрав: " << names[pc] << "\n";
+
+  if (me == pc)
+    cout << "Нічия\n";
+  else if ((me + 1) % 3 == pc)
+    cout << "Ви перемогли\n";
+  else
+    cout << "Комп'ютер переміг\n";
+
+  return 0;
+}
+
+
+
+
+4.3.6. Квадратне рівняння
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+  double a, b, c;
+  cout << "Введіть a, b, c: ";
+  cin >> a >> b >> c;
+
+  if (a == 0) {
+    cout << "Це не квадратне рівняння (a = 0)\n";
+    return 1;
+  }
+
+  double d = b * b - 4 * a * c;
+
+  if (d > 0) {
+    cout << "x1 = " << (-b + sqrt(d)) / (2 * a) << "\n";
+    cout << "x2 = " << (-b - sqrt(d)) / (2 * a) << "\n";
+  } else if (d == 0) {
+    cout << "x1 = x2 = " << -b / (2 * a) << "\n";
+  } else {
+    cout << "Дійсних коренів немає (D < 0)\n";
+  }
+
+  return 0;
+}
