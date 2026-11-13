@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int main() {
+  double a, b, c;
+  printf("Довжина, ширина і висота: ");
+  scanf("%lf %lf %lf", &a, &b, &c);
+  printf("Об'єм = %.2f\n", a * b * c);
+  return 0;
+}
