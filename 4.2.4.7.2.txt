@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int main() {
+  double s, h;
+  printf("Площа основи і висота: ");
+  scanf("%lf %lf", &s, &h);
+  printf("Об'єм = %.2f\n", s * h / 3);
+  return 0;
+}
