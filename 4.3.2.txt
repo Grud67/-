@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+  double a, b;
+  char op;
+  cout << "Введіть два числа і операцію (+ - * /): ";
+  cin >> a >> b >> op;
+
+  switch (op) {
+    case '+': cout << a + b << "\n"; break;
+    case '-': cout << a - b << "\n"; break;
+    case '*': cout << a * b << "\n"; break;
+    case '/':
+      if (b == 0)
+        cout << "Ділення на нуль\n";
+      else
+        cout << a / b << "\n";
+      break;
+    default:
+      cout << "Невідома операція\n";
+  }
+
+  return 0;
+}
