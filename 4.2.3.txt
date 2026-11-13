@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.14159265358979323846
+
+int main() {
+  double a = 5, b = 6, c = 7;
+
+  double p = (a + b + c) / 2;
+  double S = sqrt(p * (p - a) * (p - b) * (p - c));
+  double r = S / p;
+  double R = a * b * c / (4 * S);
+
+  double ha = 2 * S / a, hb = 2 * S / b, hc = 2 * S / c;
+
+  double ma = 0.5 * sqrt(2 * b * b + 2 * c * c - a * a);
+  double mb = 0.5 * sqrt(2 * a * a + 2 * c * c - b * b);
+  double mc = 0.5 * sqrt(2 * a * a + 2 * b * b - c * c);
+
+  double A = acos((b * b + c * c - a * a) / (2 * b * c)) * 180 / PI;
+  double B = acos((a * a + c * c - b * b) / (2 * a * c)) * 180 / PI;
+  double C = acos((a * a + b * b - c * c) / (2 * a * b)) * 180 / PI;
+
+  printf("S = %.4f, r = %.4f, R = %.4f\n", S, r, R);
+  printf("ha = %.4f, ma = %.4f, A = %.4f\n", ha, ma, A);
+  printf("hb = %.4f, mb = %.4f, B = %.4f\n", hb, mb, B);
+  printf("hc = %.4f, mc = %.4f, C = %.4f\n", hc, mc, C);
+
+  return 0;
+}
