@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+  srand(time(0));
+
+  char player;
+  cout << "Ваш вибір (r - камінь, s - ножиці, p - папір): ";
+  cin >> player;
+
+  int pc = rand() % 3; // 0 - камінь, 1 - ножиці, 2 - папір
+  const char* names[] = {"камінь", "ножиці", "папір"};
+
+  int me;
+  switch (player) {
+    case 'r': me = 0; break;
+    case 's': me = 1; break;
+    case 'p': me = 2; break;
+    default:
+      cout << "Невідомий вибір\n";
+      return 1;
+  }
+
+  cout << "Комп'ютер обрав: " << names[pc] << "\n";
+
+  if (me == pc)
+    cout << "Нічия\n";
+  else if ((me + 1) % 3 == pc)
+    cout << "Ви перемогли\n";
+  else
+    cout << "Комп'ютер переміг\n";
+
+  return 0;
+}
