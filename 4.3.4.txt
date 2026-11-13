@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+  int lo = 1, hi = 100;
+  char ans;
+
+  cout << "Загадайте число від 1 до 100.\n";
+
+  while (lo < hi) {
+    int mid = (lo + hi) / 2;
+    cout << "Чи число більше за " << mid << "? (y/n): ";
+    cin >> ans;
+    if (ans == 'y')
+      lo = mid + 1;
+    else
+      hi = mid;
+  }
+
+  cout << "Ваше число: " << lo << "\n";
+  return 0;
+}
